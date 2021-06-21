@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option go_package = "product/productpb";
+
+package productpb;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+service ProductService {
+    rpc New (NewRequest) returns (Product) {}
+    rpc Get (GetRequest) returns (Product) {}
+}
+
+message Empty {}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    bool active = 3;
+    repeated string attributes = 4 ;
+    string description = 5 ;
+    repeated string images = 6 ;
+    map<string, string> metadata = 7 ;
+    string url = 9 ;
+    int64 created = 998 ;
+    int64 updated = 999 ;
+}
+
+message NewRequest {
+    string name = 1 [(gogoproto.moretags) = "validate:\"required,gte=2\""];
+    bool active = 2 [(gogoproto.moretags) = "validate:\"required\""];
+    repeated string attributes = 3 [(gogoproto.moretags) = "validate:\"dive,required\""];
+    string description = 4 [(gogoproto.moretags) = "validate:\"gt=0,lt=2056\""];
+    repeated string images = 5 [(gogoproto.moretags) = "validate:\"dive,url\""];
+    map<string, string> metadata = 6 [(gogoproto.moretags) = "validate:\"\""];
+    string url = 8 [(gogoproto.moretags) = "validate:\"omitempty,url\""];
+}
+
+message GetRequest {
+    string id = 1 [(gogoproto.moretags) = "validate:\"required,uuid4\""];
+}
