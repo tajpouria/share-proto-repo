@@ -1,8 +1,8 @@
 // package: productpb
-// file: product.proto
+// file: product/productpb/product.proto
 
 import * as jspb from "google-protobuf";
-import * as github_com_gogo_protobuf_gogoproto_gogo_pb from "./github.com/gogo/protobuf/gogoproto/gogo_pb";
+import * as github_com_gogo_protobuf_gogoproto_gogo_pb from "../../github.com/gogo/protobuf/gogoproto/gogo_pb";
 
 export class Empty extends jspb.Message {
   serializeBinary(): Uint8Array;
